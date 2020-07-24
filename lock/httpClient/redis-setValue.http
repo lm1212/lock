@@ -1,0 +1,5 @@
+POST {{url}}/redis/setValue/
+Content-Type: application/x-www-form-urlencoded
+
+key=lm
+###

@@ -1,0 +1,5 @@
+GET {{url}}/redis/getValue/lm
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+###
