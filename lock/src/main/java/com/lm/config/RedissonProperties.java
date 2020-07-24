@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 //该值为空 配置不生效
 @ConditionalOnProperty("redisson.password")
 @Data
-public class RedissionConfiguration {
+public class RedissonProperties {
 
     private int timeout = 3000;
 

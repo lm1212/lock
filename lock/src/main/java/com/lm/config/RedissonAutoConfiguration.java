@@ -1,6 +1,7 @@
 package com.lm.config;
 
 
+
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -10,6 +11,7 @@ import org.redisson.config.SingleServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,11 +22,11 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnClass(Config.class)
-//@EnableConfigurationProperties(RedissionConfiguration.class)
+@EnableConfigurationProperties(RedissonProperties.class)
 public class RedissonAutoConfiguration {
 
     @Autowired
-    private RedissionConfiguration redissonProperties;
+    private RedissonProperties redissonProperties;
 
     /**
      * 哨兵模式自动装配
@@ -74,7 +76,6 @@ public class RedissonAutoConfiguration {
 //    @Bean
 //    DistributedLocker distributedLocker(@Qualifier("redissonSingle") RedissonClient redissonClient) {
 //        DistributedLocker locker = new RedissonDistributedLocker();
-////        RedissonClient redissonClient = this.redissonSingle();
 //        ((RedissonDistributedLocker) locker).setRedissonClient(redissonClient);
 //        RedissonLockUtil.setLocker(locker);
 //        return locker;

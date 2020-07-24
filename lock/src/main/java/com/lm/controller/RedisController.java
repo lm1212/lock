@@ -20,6 +20,7 @@ public class RedisController {
     RedisTemplateOperator redisTemplateOperator;
 
     @Qualifier("redissonSingle")
+    @Autowired
     RedissonClient redissonClient;
 
     @GetMapping("getValue/{key}")
@@ -39,23 +40,20 @@ public class RedisController {
     @GetMapping("/task")
     public void task(){
         log.info("task start");
-        RLock lock = redissonClient.getLock("lm");
+        RLock lock = redissonClient.getLock("redis");
         boolean getLock = false;
 
         try {
-            if (getLock = lock.tryLock(0,5, TimeUnit.SECONDS)){
+            boolean tryLock = lock.tryLock(0, 5, TimeUnit.SECONDS);
+            if (getLock = tryLock){
                 //执行业务逻辑
-                System.out.println("拿到锁干活");
-
+                log.info("拿到锁干活");
             }else {
                 log.info("Redisson分布式锁没有获得锁:{},ThreadName:{}","lm",Thread.currentThread().getName());
             }
-
         } catch (InterruptedException e) {
             log.error("Redisson 获取分布式锁异常,异常信息:{}",e);
         }finally {
-
-
             if (!getLock){
                 return;
             }
