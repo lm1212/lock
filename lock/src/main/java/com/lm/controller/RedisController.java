@@ -19,7 +19,7 @@ public class RedisController {
     @Autowired
     RedisTemplateOperator redisTemplateOperator;
 
-    @Qualifier("redissonSingle")
+    @Qualifier("redissonSentinel")
     @Autowired
     RedissonClient redissonClient;
 
